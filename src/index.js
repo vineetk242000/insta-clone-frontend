@@ -1,19 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import { BrowserRouter } from 'react-router-dom';
-import authReducer from './store/reducers/auth'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { BrowserRouter } from "react-router-dom";
+import rootReducer from "./store/reducers/rootReducer";
 
-const store = createStore(authReducer)
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-    <Provider store={store}>
+  <Provider store={store}>
     <BrowserRouter>
-    <App />
+      <App />
     </BrowserRouter>
-    </Provider>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById("root")
 );
-
