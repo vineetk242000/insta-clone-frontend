@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./LogIn.css";
 import { useDispatch } from "react-redux";
-import * as actionTypes from "../../store/actions/actionTypes";
 import request from "../../axios/post";
 import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
+import { loginUser } from "../../store/actions/auth";
 
 function LogIn(props) {
   const dispatch = useDispatch();
@@ -18,12 +18,8 @@ function LogIn(props) {
       pass: pass,
     };
     const response = await request("/user/login", user);
-    console.log(response);
     if (response.status === 200) {
-      dispatch({
-        type: actionTypes.AUTH_SUCCESS,
-        payload: response.data.token,
-      });
+      dispatch(loginUser(response.data.token));
       props.history.push("/user");
       dispatch({
         type: SET_TOASTIFY,

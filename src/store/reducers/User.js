@@ -15,6 +15,18 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.LOGIN_USER:
+      return updateObject(state, {
+        website: action.payload.website,
+        email: action.payload.email,
+        bio: action.payload.bio,
+        gender: action.payload.gender,
+        name: action.payload.name,
+        userName: action.payload.userName,
+        avatar: action.payload.avatar,
+        followingCount: action.payload.followingCount,
+        follwersCount: action.payload.follwersCount,
+      });
     case actionTypes.EDIT_USER_DETAILS:
       return updateObject(state, {
         website: action.website,

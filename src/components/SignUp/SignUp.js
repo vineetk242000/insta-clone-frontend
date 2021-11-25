@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./SignUp.css";
-import axios from "axios";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import request from "../../axios/post";
