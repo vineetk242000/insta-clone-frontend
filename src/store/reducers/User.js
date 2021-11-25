@@ -24,8 +24,8 @@ const userReducer = (state = initialState, action) => {
         name: action.payload.name,
         userName: action.payload.userName,
         avatar: action.payload.avatar,
-        followingCount: action.payload.followingCount,
-        follwersCount: action.payload.follwersCount,
+        followingCount: action.payload.following.length,
+        follwersCount: action.payload.followers.length,
       });
     case actionTypes.EDIT_USER_DETAILS:
       return updateObject(state, {

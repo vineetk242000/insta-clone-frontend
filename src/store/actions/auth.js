@@ -1,12 +1,13 @@
 import { LOGIN_USER, LOGOUT_USER } from "../actionTypes/user";
 import { AUTH_FAILED, AUTH_SUCCESS } from "../actionTypes/auth";
 import request from "../../axios/get";
+import { ADD_POSTS } from "../actionTypes/post";
 
 export const loginUser = (token) => {
   return async (dispatch) => {
     dispatch({
       type: AUTH_SUCCESS,
-      token: token,
+      payload: token,
     });
     const response = await request(`/user/me`, token);
     localStorage.setItem("token", token);
@@ -14,6 +15,10 @@ export const loginUser = (token) => {
       dispatch({
         type: LOGIN_USER,
         payload: response.data.userData,
+      });
+      dispatch({
+        type: ADD_POSTS,
+        payload: response.data.userData.posts,
       });
     } else {
       dispatch({

@@ -26,7 +26,7 @@ function SignUp(props) {
     const user = {
       name: name,
       email: email,
-      pass: pass,
+      password: pass,
       userName: userName,
     };
     const response = await request("/user/register", user);

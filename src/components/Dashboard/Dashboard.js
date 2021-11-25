@@ -168,13 +168,7 @@ function Dashboard(props) {
                     style={{ textDecoration: "none" }}
                     key={post._id}
                   >
-                    <img
-                      src={`http://localhost:3001/image/${post.imageUrl.slice(
-                        58,
-                        post.imageUrl.length
-                      )}`}
-                      alt="post"
-                    />
+                    <img src={post.images[0]} alt="post" />
                   </Link>
                 )
               )

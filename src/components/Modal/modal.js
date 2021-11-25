@@ -6,47 +6,48 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import axios from "axios";
 import * as actionTypes from "../../store/actionTypes/post";
+import request from "../../axios/post";
+import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
 
 function FormDialog(props) {
+  console.log(props.token);
+  const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState();
   const [caption, setCaption] = useState("");
   const [imagePreview, setImagePreview] = useState();
-  const postCreator = props.userId;
   const handleClose = () => {
     props.setOpen(false);
-  };
-
-  const refreshDashoard = async () => {
-    await axios
-      .get(`http://localhost:3001/getPosts/${props.userId}`)
-      .then((response) => {
-        console.log(response);
-        props.updatePost(response.data.posts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const handleSubmit = async () => {
     const newPost = new FormData();
     newPost.append("caption", caption);
-    newPost.append("user", postCreator);
-    newPost.append("image", selectedFile);
+    newPost.append("images", selectedFile);
 
-    await axios
-      .post("http://localhost:3001/createPost", newPost)
-      .then((response) => {
-        props.newPostCreated();
-        refreshDashoard();
-        props.setOpen(false);
-      })
-      .catch((err) => {
-        console.log(err);
+    const response = await request("/posts/new", newPost, props.token);
+    if (response.status === 200) {
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: "Post Created!",
+          type: "success",
+          open: true,
+        },
       });
+      props.setOpen(false);
+    } else {
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: "Try again later!",
+          type: "error",
+          open: true,
+        },
+      });
+    }
   };
 
   const handleInputChange = async (event) => {
@@ -102,8 +103,7 @@ function FormDialog(props) {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId,
-    posts: state.posts,
+    token: state.authReducer.token,
   };
 };
 

@@ -7,6 +7,12 @@ const initialState = {
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.ADD_POSTS:
+      return updateObject(state, {
+        posts: action.payload,
+        postCount: action.payload.length,
+      });
+
     case actionTypes.POST_CREATED:
       return updateObject(state, {
         postCount: state.postCount + 1,
