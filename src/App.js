@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignUp from "./screens/SignUp";
 import LogIn from "./screens/SignIn";
 import Feed from "./screens/Feed";
-import Dashboard from "./screens/Dasboard";
+import Dashboard from "./screens/Dashboard";
 import Explore from "./screens/Explore";
 import EditUserInfo from "./screens/EditInfo";
 import SearchResults from "./screens/Search";

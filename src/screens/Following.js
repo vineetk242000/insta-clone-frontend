@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../styles/component/followers.css";
+import "../styles/component/Followers.css";
 import Avatar from "@material-ui/core/Avatar";
 import { connect } from "react-redux";
 import axios from "axios";
-import Unfollow from "../components/follow";
+import Unfollow from "../components/Follow";
 import { Link } from "react-router-dom";
 
 const MapFolllowing = (props) => {

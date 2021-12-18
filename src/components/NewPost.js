@@ -11,7 +11,7 @@ import * as actionTypes from "../store/actionTypes/post";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 
-function FormDialog(props) {
+function NewPost(props) {
   console.log(props.token);
   const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState();
@@ -121,4 +121,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost);

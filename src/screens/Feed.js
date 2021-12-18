@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import "../styles/screen/Feed.css";
 import { connect, useDispatch, useSelector } from "react-redux";
-import Follow from "../components/follow";
-import SinglePost from "../components/feedPost";
+import Follow from "../components/Follow";
+import SinglePost from "../components/FeedPost";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 

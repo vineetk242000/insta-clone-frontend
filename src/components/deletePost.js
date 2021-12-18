@@ -5,7 +5,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import DialogContent from "@material-ui/core/DialogContent";
-import "../styles/component/deletePost.css";
+import "../styles/component/DeletePost.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as actionTypes from "../store/actionTypes/post";
@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" in="true" ref={ref} {...props} />;
 });
 
-function SimpleDialog(props) {
+function DeletePost(props) {
   const { open, setOpen, userId, postId } = props;
 
   const handleClose = () => {
@@ -104,4 +104,4 @@ const mapDispatchToProps = () => (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(SimpleDialog));
+export default connect(null, mapDispatchToProps)(withRouter(DeletePost));

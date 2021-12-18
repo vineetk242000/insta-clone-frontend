@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/component/followers.css";
+import "../styles/component/Followers.css";
 import Avatar from "@material-ui/core/Avatar";
 import { connect } from "react-redux";
 import axios from "axios";

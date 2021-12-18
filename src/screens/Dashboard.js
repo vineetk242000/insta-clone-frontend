@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import "../styles/screen/Dashboard.css";
 import { PostIcon, BookmarkIcon, NewPostIcon } from "../components/Icons";
 import { connect, useDispatch, useSelector } from "react-redux";
-import Modal from "../components/modal";
+import Modal from "../components/NewPost";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 

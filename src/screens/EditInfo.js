@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import "../styles/screen/edit_info.css";
+import "../styles/screen/EditInfo.css";
 import { connect, useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../store/actionTypes/user";
 import request from "../middlewares/axios/post";

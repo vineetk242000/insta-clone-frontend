@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "../styles/screen/post.css";
+import "../styles/screen/Post.css";
 import Avatar from "@material-ui/core/Avatar";
 import { CommentIcon, InboxIcon, MoreIcon } from "../components/Icons";
 import { connect, useDispatch, useSelector } from "react-redux";
 import Like from "../components/LikePost";
 import Save from "../components/SavePost";
 import { Link } from "react-router-dom";
-import DeletePost from "../components/deletePost";
+import DeletePost from "../components/DeletePost";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 

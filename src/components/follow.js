@@ -5,7 +5,7 @@ import * as actionTypes from "../store/actionTypes/user";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 import request from "../middlewares/axios/get";
 
-const Unfollow = (props) => {
+const FollowButton = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authReducer.token);
   const [follow, setFollow] = useState(props.follow);
@@ -105,4 +105,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Unfollow);
+export default connect(null, mapDispatchToProps)(FollowButton);

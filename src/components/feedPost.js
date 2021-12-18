@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 
-const SinglePost = (props) => {
+const FeedPost = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authReducer.token);
   const post = props.post;
@@ -232,4 +232,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SinglePost);
+export default connect(mapStateToProps)(FeedPost);

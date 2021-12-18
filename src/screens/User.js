@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import "../styles/screen/Dashboard.css";
 import { PostIcon } from "../components/Icons";
 import { useDispatch, useSelector } from "react-redux";
-import Follow from "../components/follow";
+import Follow from "../components/Follow";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 
