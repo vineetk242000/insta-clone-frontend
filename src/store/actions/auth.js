@@ -1,6 +1,6 @@
 import { LOGIN_USER, LOGOUT_USER } from "../actionTypes/user";
 import { AUTH_FAILED, AUTH_SUCCESS } from "../actionTypes/auth";
-import request from "../../axios/get";
+import request from "../../middlewares/axios/get";
 import { ADD_POSTS } from "../actionTypes/post";
 
 export const loginUser = (token) => {
