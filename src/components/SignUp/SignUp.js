@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import "./SignUp.css";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import request from "../../axios/post";
+import request from "../../middlewares/axios/post";
 import { useDispatch } from "react-redux";
 import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
 

@@ -4,14 +4,16 @@ import Header from "../Header/Header";
 import Avatar from "@material-ui/core/Avatar";
 import "./Dashboard.css";
 import { PostIcon, BookmarkIcon, NewPostIcon } from "../Icons";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Modal from "../Modal/modal";
-import axios from "axios";
+import request from "../../middlewares/axios/get";
+import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
 
 function Dashboard(props) {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.authReducer.token);
   const [open, setOpen] = useState(false);
   const [savedPosts, setSavedPosts] = useState([]);
-  const [posts, setposts] = useState([]);
 
   const handleClick = () => {
     setOpen(true);
@@ -21,15 +23,19 @@ function Dashboard(props) {
 
   useEffect(() => {
     const getSavedPosts = async () => {
-      await axios
-        .get(`http://localhost:3001/get_saved_posts/${props.userId}`)
-        .then(function (response) {
-          setSavedPosts(response.data.posts);
-          console.log(response.data.posts);
-        })
-        .catch(function (error) {
-          console.log(error);
+      const response = await request("/savedPosts", token);
+      if (response.status === 200) {
+        setSavedPosts(response.data.posts);
+      } else {
+        dispatch({
+          type: SET_TOASTIFY,
+          payload: {
+            msg: "Something went wrong!",
+            type: "error",
+            open: true,
+          },
         });
+      }
     };
 
     getSavedPosts();

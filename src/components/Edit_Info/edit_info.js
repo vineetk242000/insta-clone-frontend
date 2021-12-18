@@ -1,12 +1,16 @@
 import React, { useState, useRef } from "react";
-import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import "./edit_info.css";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Header from "../Header/Header";
 import * as actionTypes from "../../store/actionTypes/user";
+import request from "../../middlewares/axios/post";
+import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
 
 function EditUserInfo(props) {
+  const token = useSelector((state) => state.authReducer.token);
+  const dispatch = useDispatch();
+
   const [name, setName] = useState(`${props.name}`);
   const [userName, setUserName] = useState(`${props.userName}`);
   const [userWebsite, setUserWebsite] = useState(
@@ -19,7 +23,6 @@ function EditUserInfo(props) {
   const [userGender, setUserGender] = useState(
     `${props.userGender === undefined ? "" : props.userGender}`
   );
-  const userId = props.userId;
 
   const inputFile = useRef(null);
 
@@ -30,6 +33,7 @@ function EditUserInfo(props) {
   const [avatar, setAvatar] = useState();
   const [previewAvatar, setPreviewAvatar] = useState(props.avatar);
   const [isAvatar, setIsAvatar] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const updateUserDetails = new FormData();
@@ -40,27 +44,42 @@ function EditUserInfo(props) {
     updateUserDetails.append("website", userWebsite);
     updateUserDetails.append("bio", userBio);
     updateUserDetails.append("gender", userGender);
-    updateUserDetails.append("userId", userId);
     updateUserDetails.append("image", avatar);
 
-    await axios
-      .post("http://localhost:3001/editUserProfile", updateUserDetails)
-      .then(async function (response) {
-        console.log(response);
-        props.updateUserData(
-          name,
-          userEmail,
-          userName,
-          userWebsite,
-          userGender,
-          userBio,
-          response.data.avatar
-        );
-        props.history.push("/dashboard");
-      })
-      .catch(function (error) {
-        console.log(error);
+    const response = await request(
+      "/editUserProfile",
+      updateUserDetails,
+      token
+    );
+    if (response.status === 200) {
+      props.updateUserData(
+        name,
+        userEmail,
+        userName,
+        userWebsite,
+        userGender,
+        userBio,
+        response.data.avatar
+      );
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: "User details updated!",
+          type: "success",
+          open: true,
+        },
       });
+      props.history.push("/dashboard");
+    } else {
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: "Something went wrong!",
+          type: "error",
+          open: true,
+        },
+      });
+    }
   };
 
   const handleAvatarChange = (event) => {

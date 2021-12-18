@@ -7,9 +7,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect, useDispatch } from "react-redux";
-import axios from "axios";
 import * as actionTypes from "../../store/actionTypes/post";
-import request from "../../axios/post";
+import request from "../../middlewares/axios/post";
 import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
 
 function FormDialog(props) {
@@ -18,6 +17,7 @@ function FormDialog(props) {
   const [selectedFile, setSelectedFile] = useState();
   const [caption, setCaption] = useState("");
   const [imagePreview, setImagePreview] = useState();
+
   const handleClose = () => {
     props.setOpen(false);
   };

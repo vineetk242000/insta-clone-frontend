@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../Dashboard/Dashboard.css";
-import { connect } from "react-redux";
-import axios from "axios";
+import { useDispatch, useSelector, connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes/user";
+import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
+import request from "../../middlewares/axios/get";
 
 const Unfollow = (props) => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.authReducer.token);
   const [follow, setFollow] = useState(props.follow);
-  const userId = props.userId;
 
   useEffect(() => {
     setFollow(props.follow);
@@ -14,34 +16,38 @@ const Unfollow = (props) => {
 
   const handleFollowUser = async (event) => {
     event.preventDefault();
-    await axios
-      .get(
-        `http://localhost:3001/follow/${userId}/${props.userIdToFollow.toString()}`
-      )
-      .then(function (response) {
-        console.log(response);
-        setFollow(true);
-        props.incFollowingCount();
-      })
-      .catch(function (error) {
-        console.log(error);
+    const response = await request(`/follow/${props.userIdToFollow}`, token);
+    if (response.status === 200) {
+      setFollow(true);
+      props.incFollowingCount();
+    } else {
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: "Something went wrong!",
+          type: "error",
+          open: true,
+        },
       });
+    }
   };
 
   const handleUnfollowUser = async (event) => {
     event.preventDefault();
-    await axios
-      .get(
-        `http://localhost:3001/unfollow/${userId}/${props.userIdToFollow.toString()}`
-      )
-      .then(function (response) {
-        console.log(response);
-        setFollow(false);
-        props.decFollowingCount();
-      })
-      .catch(function (error) {
-        console.log(error);
+    const response = await request(`/unfollow/${props.userIdToFollow}`, token);
+    if (response.status === 200) {
+      setFollow(false);
+      props.decFollowingCount();
+    } else {
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: "Something went wrong!",
+          type: "error",
+          open: true,
+        },
       });
+    }
   };
 
   if (follow) {
@@ -85,12 +91,6 @@ const Unfollow = (props) => {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.userId,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     incFollowingCount: () =>
@@ -105,4 +105,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Unfollow);
+export default connect(null, mapDispatchToProps)(Unfollow);

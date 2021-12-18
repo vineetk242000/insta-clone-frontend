@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./LogIn.css";
 import { useDispatch } from "react-redux";
-import request from "../../axios/post";
+import request from "../../middlewares/axios/post";
 import { SET_TOASTIFY } from "../../store/actionTypes/toastify";
 import { loginUser } from "../../store/actions/auth";
 
