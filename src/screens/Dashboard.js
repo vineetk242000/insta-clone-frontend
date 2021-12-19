@@ -7,6 +7,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import Modal from "../components/NewPost";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { Container } from "@material-ui/core";
 
 function Dashboard(props) {
   const dispatch = useDispatch();
@@ -42,81 +43,79 @@ function Dashboard(props) {
   }, []);
 
   return (
-    <div>
+    <Container maxWidth="md" className="dashboard-container">
       <Modal open={open} setOpen={setOpen} />
-      <div className="dashboard-container">
-        <div className="top">
-          <div style={{ display: "inline-block", width: "250px" }}>
-            <Avatar
-              style={{
-                height: "175px",
-                width: "175px",
-                verticalAlign: "middle",
-              }}
-              src={
-                props.avatar === undefined
-                  ? null
-                  : `http://localhost:3001/image/${props.avatar.slice(
-                      58,
-                      props.avatar.length
-                    )}`
-              }
-            />
-          </div>
-          <div
+      <div className="top">
+        <div style={{ display: "inline-block", width: "250px" }}>
+          <Avatar
             style={{
-              display: "inline-block",
-              width: "500px",
-              verticalAlign: "top",
+              height: "175px",
+              width: "175px",
+              verticalAlign: "middle",
+            }}
+            src={
+              props.avatar === undefined
+                ? null
+                : `http://localhost:3001/image/${props.avatar.slice(
+                    58,
+                    props.avatar.length
+                  )}`
+            }
+          />
+        </div>
+        <div
+          style={{
+            display: "inline-block",
+            width: "500px",
+            verticalAlign: "top",
+          }}
+        >
+          <div className="userName">
+            <p>{props.userName}</p>
+            <span>
+              <Link to="/user/edit">
+                <button>Edit Profile</button>
+              </Link>
+            </span>
+          </div>
+          <div className="count">
+            <p>
+              <span className="bold">{props.postCount}</span> posts
+            </p>
+            <p>
+              <Link
+                to="/user/followers"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <span className="bold">{props.followersCount}</span> followers
+              </Link>
+            </p>
+            <p>
+              <Link
+                to="/user/following"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <span className="bold">{props.followingCount}</span> following
+              </Link>
+            </p>
+          </div>
+          <p>
+            <span className="user-name">{props.name}</span>
+          </p>
+          <a
+            href={props.website}
+            style={{
+              margin: "0",
+              padding: "0",
+              textDecoration: "none",
+              color: "#00376B",
             }}
           >
-            <div className="userName">
-              <p>{props.userName}</p>
-              <span>
-                <Link to="/user/edit">
-                  <button>Edit Profile</button>
-                </Link>
-              </span>
-            </div>
-            <div className="count">
-              <p>
-                <span className="bold">{props.postCount}</span> posts
-              </p>
-              <p>
-                <Link
-                  to="/user/followers"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <span className="bold">{props.followersCount}</span> followers
-                </Link>
-              </p>
-              <p>
-                <Link
-                  to="/user/following"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <span className="bold">{props.followingCount}</span> following
-                </Link>
-              </p>
-            </div>
-            <p>
-              <span className="user-name">{props.name}</span>
-            </p>
-            <a
-              href={props.website}
-              style={{
-                margin: "0",
-                padding: "0",
-                textDecoration: "none",
-                color: "#00376B",
-              }}
-            >
-              <span className="user-name">{props.website}</span>
-            </a>
-            <p>
-              <span className="user-name">{props.bio}</span>
-            </p>
-          </div>
+            <span className="user-name">{props.website}</span>
+          </a>
+          <p>
+            <span className="user-name">{props.bio}</span>
+          </p>
         </div>
       </div>
       <div className="posts-section">
@@ -178,7 +177,7 @@ function Dashboard(props) {
               )
             )}
       </div>
-    </div>
+    </Container>
   );
 }
 

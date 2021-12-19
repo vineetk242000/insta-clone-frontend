@@ -1,16 +1,11 @@
-.explore-section{
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    top:75px;
-    padding: 0 155px;
+.explore-section {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
 }
 
-.explore-section img{
-    height: 293px;
-    width:293px;
-    margin:25px 30px 0px 30px;
+.explore-section img {
+  height: 293px;
+  width: 293px;
+  margin: 25px 30px 0px 30px;
 }

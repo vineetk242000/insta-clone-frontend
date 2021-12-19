@@ -3,6 +3,7 @@ import "../styles/screen/Explore.css";
 import { useDispatch, useSelector } from "react-redux";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { Container } from "@material-ui/core";
 
 function Saved(props) {
   const dispatch = useDispatch();
@@ -30,18 +31,11 @@ function Saved(props) {
   }, [setPosts]);
 
   return (
-    <div className="explore-section">
+    <Container maxWidth="md" className="explore-section">
       {posts.map((post) => (
-        <img
-          src={`http://localhost:3001/image/${post.imageUrl.slice(
-            58,
-            post.imageUrl.length
-          )}`}
-          key={post._id}
-          alt="Explore-Posts"
-        />
+        <img src={post.images[0]} key={post._id} alt="Explore-Posts" />
       ))}
-    </div>
+    </Container>
   );
 }
 

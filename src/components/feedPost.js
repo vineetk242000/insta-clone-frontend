@@ -112,13 +112,7 @@ const FeedPost = (props) => {
           <p style={{ fontWeight: "500" }}>{post.user.userName}</p>
         </Link>
       </div>
-      <img
-        src={`http://localhost:3001/image/${post.imageUrl.slice(
-          58,
-          post.imageUrl.length
-        )}`}
-        alt="Post"
-      ></img>
+      <img src={post.images[0]} alt="Post"></img>
       <div className="post-details-container">
         <div className="post-action-container">
           <LikePost

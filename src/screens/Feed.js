@@ -7,6 +7,7 @@ import Follow from "../components/Follow";
 import SinglePost from "../components/FeedPost";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { Container } from "@material-ui/core";
 
 function Feed(props) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function Feed(props) {
 
   useEffect(() => {
     const getFeed = async () => {
-      const response = await request("/getFeed", token);
+      const response = await request("/user/feed", token);
       if (response.status === 200) {
         setFeed(response.data.posts);
       } else {
@@ -56,7 +57,7 @@ function Feed(props) {
   }, []);
 
   return (
-    <div className="feed-section">
+    <Container maxWidth="md" className="feed-section">
       <div className="posts">
         {feed.map((post) => (
           <SinglePost post={post} />
@@ -149,7 +150,7 @@ function Feed(props) {
           ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

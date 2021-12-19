@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { Container } from "@material-ui/core";
 
-function Explore(props) {
+function Explore() {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.authReducer.token);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    async function getExploreContent() {
-      const response = request("/explore", token);
+    const getExploreContent = async () => {
+      const response = await request("/posts/explore", token);
       if (response.status === 200) {
         setPosts(response.data.posts);
       } else {
@@ -25,28 +26,21 @@ function Explore(props) {
           },
         });
       }
-    }
+    };
     getExploreContent();
   }, []);
 
   return (
-    <div className="explore-section">
+    <Container maxWidth="md" className="explore-section">
       {posts.map((post) => (
         <Link
           to={{ pathname: "/feed/post", state: { post: post } }}
           style={{ textDecoration: "none" }}
         >
-          <img
-            src={`http://localhost:3001/image/${post.imageUrl.slice(
-              58,
-              post.imageUrl.length
-            )}`}
-            key={post._id}
-            alt="Explore-Posts"
-          />
+          <img src={post.images[0]} key={post._id} alt="Explore-Posts" />
         </Link>
       ))}
-    </div>
+    </Container>
   );
 }
 

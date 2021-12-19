@@ -14,10 +14,13 @@ import Post from "./screens/Post";
 import Saved from "./screens/SavedPosts";
 import UserDashboard from "./screens/User";
 import Toastify from "./components/Snackbar";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <div>
+      <Header />
       <Toastify />
       <Switch>
         <Route path="/" exact component={SignUp} />

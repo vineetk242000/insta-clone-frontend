@@ -1,122 +1,101 @@
-.dashboard-container{
-    display:flex;
-    margin-left: auto;
-    margin-right:auto;
-    justify-content: center;
-    position: relative;
-    top:75px;
+.dashboard-container {
+  display: flex;
 }
 
-.top{
-    display:flex;
-    justify-content: space-between;
-    margin-top: 25px;
-    margin-bottom: 50px;
+.top {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 50px;
 }
 
-
-.userName{
-    display:block;
-    line-height: 0;
-    padding: 14px 0 14px 0;
-    margin: 0;
+.userName {
+  display: block;
+  line-height: 0;
+  padding: 14px 0 14px 0;
+  margin: 0;
 }
 
-.userName button{
-    font-size: 14px;
-    font-weight: 400;
-    background-color:inherit;
-    border: 2px solid #EBEBEB;
-    padding:4px 10px;
-    border-radius: 3px;
-    margin: 0;
-
+.userName button {
+  font-size: 14px;
+  font-weight: 400;
+  background-color: inherit;
+  border: 2px solid #ebebeb;
+  padding: 4px 10px;
+  border-radius: 3px;
+  margin: 0;
 }
 
-
-.userName p{
-    display:inline-block;
-    font-size: 25px;
-    font-weight: 300;
-    line-height: 25px;
-    letter-spacing: 2px;
-    vertical-align: middle;
-    margin:0;
+.userName p {
+  display: inline-block;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 25px;
+  letter-spacing: 2px;
+  vertical-align: middle;
+  margin: 0;
 }
 
-.userName span{
-    margin-left: 25px;
-    vertical-align: middle;
+.userName span {
+  margin-left: 25px;
+  vertical-align: middle;
 }
 
-.count{
-    display:block;
-    width:100%;
-    margin: 0;
-    padding: 10px 0 10px 0;
+.count {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 10px 0;
 }
 
-.count p{
-    display: inline-block;
-    margin:0 4% 0 0;
+.count p {
+  display: inline-block;
+  margin: 0 4% 0 0;
 }
 
-.bold{
-    font-weight: 600;
+.bold {
+  font-weight: 600;
 }
 
-.user-name{
-    font-weight: 600;
-    font-size: 16px;
+.user-name {
+  font-weight: 600;
+  font-size: 16px;
 }
 
-.posts-section{
-    display:flex;
-    margin-left: auto;
-    margin-right:auto;
-    justify-content: center;
-    border-top: 1px #EBEBEB solid;
-    width: 62%;
-    position: relative;
-    top:75px;
+.posts-section {
+  display: flex;
+  border-top: 1px #ebebeb solid;
 }
-.posts-section-header{
-    display: inline-block;
-    margin-right:50px;
-
+.posts-section-header {
+  display: inline-block;
+  margin-right: 50px;
 }
 
-.posts-section-header:hover{
-    margin-top: 1px solid black;
+.posts-section-header:hover {
+  margin-top: 1px solid black;
 }
 
-.posts-section-title{
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 13px;
-    font-weight: 600;
+.posts-section-title {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.my-posts-container{
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding-left:125px;
-    padding-right: 125px;
-    position: relative;
-    top:75px;
+.my-posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 293px;
+  width: 293px;
+  margin: 10px 15px;
 }
 
-.my-posts-container img{
-    height: 293px;
-    width:293px;
-    margin:10px 15px;
+.my-posts-container img {
+  width: 100%;
+  height: auto;
 }
 
-.dashboard-container a{
-    margin: 0;
-    padding: 0;
+.dashboard-container a {
+  margin: 0;
+  padding: 0;
 }
-
