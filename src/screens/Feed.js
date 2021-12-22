@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import "../styles/screen/Feed.css";
-import { connect, useDispatch, useSelector } from "react-redux";
-import Follow from "../components/Follow";
+import { useDispatch, useSelector } from "react-redux";
+import User from "../components/UserSugestions";
 import SinglePost from "../components/FeedPost";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
@@ -12,6 +12,7 @@ import { Container } from "@material-ui/core";
 function Feed(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authReducer.token);
+  const { name, avatar, userName } = useSelector((state) => state.userReducer);
 
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const [feed, setFeed] = useState([]);
@@ -35,7 +36,7 @@ function Feed(props) {
     };
 
     const getFollowSuggestions = async () => {
-      const response = request("/suggestions", token);
+      const response = await request("/user/accounts", token);
       if (response.status === 200) {
         setSuggestedUsers(response.data.users);
       } else {
@@ -67,32 +68,20 @@ function Feed(props) {
         <div className="current-user-section">
           <Avatar
             style={{
-              display: "inline-block",
               height: "50px",
               width: "50px",
               border: 0,
               objectFit: "cover",
             }}
-            src={
-              props.avatar === undefined
-                ? null
-                : `http://localhost:3001/image/${props.avatar.slice(
-                    58,
-                    props.avatar.length
-                  )}`
-            }
+            src={avatar === undefined ? null : avatar}
           />
           <div className="current-user-userName">
-            <p style={{ fontWeight: "500" }}>{props.userName}</p>
-            <p>{props.name}</p>
+            <p style={{ fontWeight: "500" }}>{userName}</p>
+            <p>{name}</p>
           </div>
           <a
             href="/login"
             style={{
-              display: "inlineBlock",
-              position: "relative",
-              top: "14px",
-              verticalAlign: "top",
               color: "grey",
               textDecoration: "none",
             }}
@@ -102,12 +91,16 @@ function Feed(props) {
         </div>
 
         <div className="follow-suggestions-section">
-          <p>
-            Suggestions for you{" "}
-            <span style={{ marginLeft: "80px", color: "#55B7F7" }}>
-              See all
-            </span>
-          </p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <p>Suggestions for you</p>
+            <p style={{ color: "#55B7F7" }}>See all</p>
+          </div>
           {suggestedUsers.map((user) => (
             <div
               className="suggested-users-container"
@@ -115,18 +108,10 @@ function Feed(props) {
             >
               <Avatar
                 style={{
-                  display: "inline-block",
                   border: 0,
                   objectFit: "cover",
                 }}
-                src={
-                  user.avatar === undefined
-                    ? null
-                    : `http://localhost:3001/image/${user.avatar.slice(
-                        58,
-                        user.avatar.length
-                      )}`
-                }
+                src={user.avatar === undefined ? null : user.avatar}
                 size={100}
               />
               <div className="current-user-userName">
@@ -141,11 +126,7 @@ function Feed(props) {
                 </Link>
                 <p>{user.name}</p>
               </div>
-              <Follow
-                userId={userId}
-                userIdToFollow={user._id}
-                follow={false}
-              />
+              <User userId={userId} userIdToFollow={user._id} follow={false} />
             </div>
           ))}
         </div>
@@ -154,13 +135,4 @@ function Feed(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    name: state.name,
-    userName: state.userName,
-    userId: state.userId,
-    avatar: state.avatar,
-  };
-};
-
-export default connect(mapStateToProps)(Feed);
+export default Feed;

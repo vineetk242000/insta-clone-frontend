@@ -1,7 +1,7 @@
 .feed-section {
-  display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
+  display: flex !important;
+  justify-content: space-evenly !important;
+  flex-flow: row nowrap !important;
 }
 .posts {
   width: 60%;
@@ -62,27 +62,22 @@
 
 .feed-right-container {
   width: 30%;
+  padding: 25px 0;
 }
 
 .follow-suggestions-section {
-  width: 100%;
-  padding: 14px;
-  margin: 25px 0 0 5px;
-  border-radius: 5px;
+  margin: 25px 0;
 }
 
 .current-user-section {
-  height: 5%;
-  width: 80%;
-  padding: 14px;
-  margin: 25px 0 0 5px;
+  margin: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
 .current-user-userName {
-  display: inline-block;
-  padding: 0;
-  vertical-align: top;
-  margin-left: 15px;
   width: 50%;
   line-height: 1.3rem;
 }
@@ -93,18 +88,19 @@
 }
 
 .suggested-users-container {
-  padding: 0.5rem 0;
+  margin: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
 .suggested-users-container button {
-  display: inline-block;
-  vertical-align: middle;
+  margin: 0;
   background-color: transparent;
   color: #55b7f7;
   font-size: 13px;
-  border-radius: 3px;
   font-weight: 600;
   outline: none;
   border: none;
-  padding: 5px 8px;
 }

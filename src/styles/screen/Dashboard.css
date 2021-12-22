@@ -1,12 +1,8 @@
-.dashboard-container {
+.user-section {
   display: flex;
-}
-
-.top {
-  display: flex;
-  justify-content: center;
-  margin-top: 25px;
-  margin-bottom: 50px;
+  justify-content: space-evenly;
+  width: 75%;
+  padding: 24px 0;
 }
 
 .userName {
@@ -65,10 +61,13 @@
 .posts-section {
   display: flex;
   border-top: 1px #ebebeb solid;
+  justify-content: center;
+  align-items: center;
 }
 .posts-section-header {
   display: inline-block;
   margin-right: 50px;
+  cursor: pointer;
 }
 
 .posts-section-header:hover {
@@ -84,13 +83,16 @@
 
 .my-posts-container {
   display: flex;
-  flex-wrap: wrap;
-  height: 293px;
-  width: 293px;
-  margin: 10px 15px;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
-.my-posts-container img {
+.dashboard-post {
+  margin: 24px 24px 24px 0;
+  width: 35%;
+}
+
+.dashboard-post img {
   width: 100%;
   height: auto;
 }

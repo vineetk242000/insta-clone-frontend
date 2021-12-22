@@ -22,21 +22,23 @@ function App() {
     <div>
       <Header />
       <Toastify />
-      <Switch>
-        <Route path="/" exact component={SignUp} />
-        <Route path="/login" exact component={LogIn} />
-        <Route path="/user" exact component={Feed} />
-        <Route path="/dashboard" exact component={Dashboard} />
-        <Route path="/explore" exact component={Explore} />
-        <Route path="/savedPosts" exact component={Saved} />
-        <Route path="/createPost" exact component={Explore} />
-        <Route path="/user/edit" exact component={EditUserInfo} />
-        <Route path="/search_results" exact component={SearchResults} />
-        <Route path="/user/followers" exact component={MapFollower} />
-        <Route path="/user/following" exact component={MapFolllowing} />
-        <Route path="/feed/post" exact component={Post} />
-        <Route path="/user/dashboard" exact component={UserDashboard} />
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route path="/" exact component={SignUp} />
+          <Route path="/login" exact component={LogIn} />
+          <Route path="/user" exact component={Feed} />
+          <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/explore" exact component={Explore} />
+          <Route path="/savedPosts" exact component={Saved} />
+          <Route path="/createPost" exact component={Explore} />
+          <Route path="/user/edit" exact component={EditUserInfo} />
+          <Route path="/search_results" exact component={SearchResults} />
+          <Route path="/user/followers" exact component={MapFollower} />
+          <Route path="/user/following" exact component={MapFolllowing} />
+          <Route path="/feed/post" exact component={Post} />
+          <Route path="/user/dashboard" exact component={UserDashboard} />
+        </Switch>
+      </Layout>
     </div>
   );
 }

@@ -196,7 +196,9 @@ const FeedPost = (props) => {
             {comment.text}
           </p>
         ))}
-        <p style={{ fontSize: "12px", color: "grey" }}>{post.createdAt}</p>
+        <p style={{ fontSize: "12px", color: "grey" }}>
+          {post.createdAt.toString()}
+        </p>
       </div>
       <div
         style={{

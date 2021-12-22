@@ -43,33 +43,17 @@ function Dashboard(props) {
   }, []);
 
   return (
-    <Container maxWidth="md" className="dashboard-container">
+    <Container maxWidth="md">
       <Modal open={open} setOpen={setOpen} />
-      <div className="top">
-        <div style={{ display: "inline-block", width: "250px" }}>
-          <Avatar
-            style={{
-              height: "175px",
-              width: "175px",
-              verticalAlign: "middle",
-            }}
-            src={
-              props.avatar === undefined
-                ? null
-                : `http://localhost:3001/image/${props.avatar.slice(
-                    58,
-                    props.avatar.length
-                  )}`
-            }
-          />
-        </div>
-        <div
+      <div className="user-section">
+        <Avatar
           style={{
-            display: "inline-block",
-            width: "500px",
-            verticalAlign: "top",
+            height: "175px",
+            width: "175px",
           }}
-        >
+          src={props.avatar === undefined ? null : props.avatar}
+        />
+        <div>
           <div className="userName">
             <p>{props.userName}</p>
             <span>
@@ -147,32 +131,36 @@ function Dashboard(props) {
       <div className="my-posts-container">
         {showSavedPosts
           ? savedPosts.map((post) => (
-              <Link
-                to={{ pathname: "/feed/post", state: { post: post } }}
-                style={{ textDecoration: "none" }}
-                key={post._id}
-              >
-                <img
-                  src={`http://localhost:3001/image/${post.imageUrl.slice(
-                    58,
-                    post.imageUrl.length
-                  )}`}
-                  alt="post"
-                />
-              </Link>
+              <div className="dashboard-post">
+                <Link
+                  to={{ pathname: "/feed/post", state: { post: post } }}
+                  style={{ textDecoration: "none" }}
+                  key={post._id}
+                >
+                  <img
+                    src={`http://localhost:3001/image/${post.imageUrl.slice(
+                      58,
+                      post.imageUrl.length
+                    )}`}
+                    alt="post"
+                  />
+                </Link>
+              </div>
             ))
           : props.posts.map(
               (post) => (
                 // eslint-disable-next-line
                 (post.isMine = true),
                 (
-                  <Link
-                    to={{ pathname: "/feed/post", state: { post: post } }}
-                    style={{ textDecoration: "none" }}
-                    key={post._id}
-                  >
-                    <img src={post.images[0]} alt="post" />
-                  </Link>
+                  <div className="dashboard-post">
+                    <Link
+                      to={{ pathname: "/feed/post", state: { post: post } }}
+                      style={{ textDecoration: "none" }}
+                      key={post._id}
+                    >
+                      <img src={post.images[0]} alt="post" />
+                    </Link>
+                  </div>
                 )
               )
             )}
