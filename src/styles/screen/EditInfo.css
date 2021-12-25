@@ -1,49 +1,43 @@
-.edit-user-details-container{
-    display: inline-block;
-    top:13%;
-    left:30%;
-    position: absolute;
-    text-align: center;
-    width:35%;
-    background-color: #ffffff;
-    padding:1.2rem 2rem;
-    border-radius: 10px;
-    border: 1px solid rgb(240, 239, 239);
+.edit-user-details-container {
+  display: inline-block;
+  top: 13%;
+  left: 30%;
+  position: absolute;
+  text-align: center;
+  width: 35%;
+  background-color: #ffffff;
+  padding: 1.2rem 2rem;
+  border-radius: 10px;
+  border: 1px solid rgb(240, 239, 239);
 }
 
-.field-container{
-    display: flex;
-    justify-content: space-between;
-    padding:0.5rem 0;
+.field-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
 }
 
-.field-container input{
-    height: 28px;
-    width: 65%;
-    display: inline-block;
-    border: 0.5px rgb(209, 206, 206) solid;
-    vertical-align: middle;
-    border-radius: 3px;
-    margin-top: 0.5rem;
-
-
+.field-container input {
+  height: 28px;
+  width: 65%;
+  display: inline-block;
+  border: 0.5px rgb(209, 206, 206) solid;
+  vertical-align: middle;
+  border-radius: 3px;
+  margin-top: 0.5rem;
 }
 
-.field-container p{
-    display: inline-block;
-    font-weight: 500;
-    vertical-align: middle;
+.field-container p {
+  display: inline-block;
+  font-weight: 500;
+  vertical-align: middle;
 }
 
-.edit-user-details-container button{
-    border:none;
-    padding:8px;
-    background-color: #0095F6;
-    color:white;
-    font-weight: 500;
-    border-radius: 3px;
+.edit-user-details-container button {
+  border: none;
+  padding: 8px;
+  background-color: #0095f6;
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
 }
-
-
-
-

@@ -36,7 +36,7 @@ function App() {
           <Route path="/user/followers" exact component={MapFollower} />
           <Route path="/user/following" exact component={MapFolllowing} />
           <Route path="/feed/post" exact component={Post} />
-          <Route path="/user/dashboard" exact component={UserDashboard} />
+          <Route path="/user/:userName" exact component={UserDashboard} />
         </Switch>
       </Layout>
     </div>

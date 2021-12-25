@@ -116,10 +116,7 @@ function Feed(props) {
               />
               <div className="current-user-userName">
                 <Link
-                  to={{
-                    pathname: "/user/dashboard",
-                    state: { userId: user._id.toString() },
-                  }}
+                  to={`/user/${user.userName}`}
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <p style={{ fontWeight: "500" }}>{user.userName}</p>

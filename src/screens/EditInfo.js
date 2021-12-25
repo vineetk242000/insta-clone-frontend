@@ -5,6 +5,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../store/actionTypes/user";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { useFormik } from "formik";
 
 function EditUserInfo(props) {
   const { name, email, userName, bio, gender, website, avatar } = useSelector(
@@ -12,6 +13,18 @@ function EditUserInfo(props) {
   );
   const token = useSelector((state) => state.authReducer.token);
   const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      name: name,
+      email: email,
+      userName: userName,
+      bio: bio,
+      gender: gender,
+      website: website,
+      avatar: avatar,
+    },
+  });
 
   const inputFile = useRef(null);
 
@@ -32,7 +45,7 @@ function EditUserInfo(props) {
     updateUserDetails.append("website", website);
     updateUserDetails.append("bio", bio);
     updateUserDetails.append("gender", gender);
-    updateUserDetails.append("image", avatar);
+    updateUserDetails.append("avatar", avatar);
 
     const response = await request(
       "/editUserProfile",

@@ -23,9 +23,9 @@ function Dashboard(props) {
 
   useEffect(() => {
     const getSavedPosts = async () => {
-      const response = await request("/savedPosts", token);
+      const response = await request("/posts/saved", token);
       if (response.status === 200) {
-        setSavedPosts(response.data.posts);
+        setSavedPosts(response.data.savedPosts);
       } else {
         dispatch({
           type: SET_TOASTIFY,
@@ -53,7 +53,7 @@ function Dashboard(props) {
           }}
           src={props.avatar === undefined ? null : props.avatar}
         />
-        <div>
+        <div style={{ width: "50%" }}>
           <div className="userName">
             <p>{props.userName}</p>
             <span>
