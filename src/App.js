@@ -34,7 +34,8 @@ function App() {
         <Switch>
           <Route path="/register" exact component={SignUp} />
           <Route path="/login" exact component={LogIn} />
-          <ProtectedRoutes path="/" component={Feed} />
+          <ProtectedRoutes path="/user/:userName" component={UserDashboard} />
+          <ProtectedRoutes path="/feed/post" component={Post} />
           <ProtectedRoutes path="/dashboard" component={Dashboard} />
           <ProtectedRoutes path="/explore" component={Explore} />
           <ProtectedRoutes path="/savedPosts" component={Saved} />
@@ -43,8 +44,7 @@ function App() {
           <ProtectedRoutes path="/search_results" component={SearchResults} />
           <ProtectedRoutes path="/user/followers" component={MapFollower} />
           <ProtectedRoutes path="/user/following" component={MapFolllowing} />
-          <ProtectedRoutes path="/feed/post" component={Post} />
-          <ProtectedRoutes path="/user/:userName" component={UserDashboard} />
+          <ProtectedRoutes path="/" component={Feed} />
         </Switch>
       </Layout>
     </div>

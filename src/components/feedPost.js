@@ -13,7 +13,7 @@ const FeedPost = (props) => {
   const token = useSelector((state) => state.authReducer.token);
   const post = props.post;
   const [comment, setComment] = useState("");
-  const [likesCount, setLikesCount] = useState(post.likesCount);
+  const [likesCount, setLikesCount] = useState(post.likes.length);
   const [newComment, setNewComment] = useState([]);
 
   const incLikes = () => {
@@ -94,19 +94,13 @@ const FeedPost = (props) => {
           src={
             post.user.avatar === undefined
               ? require("./default_avatar.jpg")
-              : `http://localhost:3001/image/${post.user.avatar.slice(
-                  58,
-                  post.user.avatar.length
-                )}`
+              : post.user.avatar
           }
           size={100}
           alt="avatar"
         />
         <Link
-          to={{
-            pathname: "/user/dashboard",
-            state: { userId: post.user._id.toString() },
-          }}
+          to={`/user/${post.user.userName}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <p style={{ fontWeight: "500" }}>{post.user.userName}</p>

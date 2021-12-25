@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 import DeletePost from "../components/DeletePost";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { Container } from "@material-ui/core";
 
 const Post = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authReducer.token);
   const post = props.location.state.post;
-  const [likes, setLikes] = useState(post.likesCount);
+  const [likes, setLikes] = useState(post.likes.length);
   const [comment, setComment] = useState("");
   const [newComment, setNewComment] = useState([]);
   const [open, setOpen] = useState(false);
@@ -83,7 +84,7 @@ const Post = (props) => {
   };
 
   return (
-    <div className="single-post-parent-container">
+    <Container maxWidth="md">
       <DeletePost
         open={open}
         setOpen={setOpen}
@@ -92,13 +93,7 @@ const Post = (props) => {
       />
       <div className="single-post-container">
         <div className="left-image-container">
-          <img
-            src={`http://localhost:3001/image/${post.imageUrl.slice(
-              58,
-              post.imageUrl.length
-            )}`}
-            alt="post"
-          />
+          <img src={post.images[0]} alt="post" />
         </div>
         <div className="single-post-details-container">
           <div className="post-posted-by-user">
@@ -111,14 +106,7 @@ const Post = (props) => {
                 border: 0,
                 objectFit: "cover",
               }}
-              src={
-                post.user.avatar === undefined
-                  ? null
-                  : `http://localhost:3001/image/${post.user.avatar.slice(
-                      58,
-                      post.user.avatar.length
-                    )}`
-              }
+              src={post.user.avatar === undefined ? null : post.user.avatar}
               size={100}
             />
             <Link
@@ -155,14 +143,7 @@ const Post = (props) => {
                 border: 0,
                 objectFit: "cover",
               }}
-              src={
-                post.user.avatar === undefined
-                  ? null
-                  : `http://localhost:3001/image/${post.user.avatar.slice(
-                      58,
-                      post.user.avatar.length
-                    )}`
-              }
+              src={post.user.avatar === undefined ? null : props.user.avatar}
               size={100}
             />
             <p style={{ fontWeight: "500" }}>{post.user.userName}</p>
@@ -184,10 +165,7 @@ const Post = (props) => {
                     src={
                       comment.user.avatar === undefined
                         ? null
-                        : `http://localhost:3001/image/${comment.user.avatar.slice(
-                            58,
-                            comment.user.avatar.length
-                          )}`
+                        : comment.user.avatar.length
                     }
                     size={100}
                   />
@@ -213,10 +191,7 @@ const Post = (props) => {
                     src={
                       comment.user.avatar === undefined
                         ? null
-                        : `http://localhost:3001/image/${comment.user.avatar.slice(
-                            58,
-                            comment.user.avatar.length
-                          )}`
+                        : comment.user.avatar
                     }
                     size={100}
                   />
@@ -268,16 +243,8 @@ const Post = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.userId,
-    userName: state.userName,
-    avatar: state.avatar,
-  };
-};
-
-export default connect(mapStateToProps)(Post);
+export default Post;

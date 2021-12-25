@@ -12,9 +12,9 @@ function Saved(props) {
 
   useEffect(() => {
     async function getSavedPosts() {
-      const response = await request("/savedPosts", token);
+      const response = await request("/posts/saved", token);
       if (response.status === 200) {
-        setPosts(response.data.posts);
+        setPosts(response.data.savedPosts);
       } else {
         dispatch({
           type: SET_TOASTIFY,

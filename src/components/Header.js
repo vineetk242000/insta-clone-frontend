@@ -55,7 +55,7 @@ function Header(props) {
           </form>
           <ul>
             <li style={{ padding: "0" }}>
-              <Link to="/user">
+              <Link to="/">
                 <HomeIcon />
               </Link>
             </li>
