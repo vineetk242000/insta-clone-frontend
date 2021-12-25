@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import SignUp from "./screens/SignUp";
 import LogIn from "./screens/SignIn";
 import Feed from "./screens/Feed";
@@ -16,27 +16,35 @@ import UserDashboard from "./screens/User";
 import Toastify from "./components/Snackbar";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
+  const location = useLocation();
+  const showHeader =
+    location.pathname === "/login" ||
+    location.pathname === "/register" ? null : (
+      <Header />
+    );
+
   return (
     <div>
-      <Header />
+      {showHeader}
       <Toastify />
       <Layout>
         <Switch>
-          <Route path="/" exact component={SignUp} />
+          <Route path="/register" exact component={SignUp} />
           <Route path="/login" exact component={LogIn} />
-          <Route path="/user" exact component={Feed} />
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/explore" exact component={Explore} />
-          <Route path="/savedPosts" exact component={Saved} />
-          <Route path="/createPost" exact component={Explore} />
-          <Route path="/user/edit" exact component={EditUserInfo} />
-          <Route path="/search_results" exact component={SearchResults} />
-          <Route path="/user/followers" exact component={MapFollower} />
-          <Route path="/user/following" exact component={MapFolllowing} />
-          <Route path="/feed/post" exact component={Post} />
-          <Route path="/user/:userName" exact component={UserDashboard} />
+          <ProtectedRoutes path="/" component={Feed} />
+          <ProtectedRoutes path="/dashboard" component={Dashboard} />
+          <ProtectedRoutes path="/explore" component={Explore} />
+          <ProtectedRoutes path="/savedPosts" component={Saved} />
+          <ProtectedRoutes path="/createPost" component={Explore} />
+          <ProtectedRoutes path="/user/edit" component={EditUserInfo} />
+          <ProtectedRoutes path="/search_results" component={SearchResults} />
+          <ProtectedRoutes path="/user/followers" component={MapFollower} />
+          <ProtectedRoutes path="/user/following" component={MapFolllowing} />
+          <ProtectedRoutes path="/feed/post" component={Post} />
+          <ProtectedRoutes path="/user/:userName" component={UserDashboard} />
         </Switch>
       </Layout>
     </div>

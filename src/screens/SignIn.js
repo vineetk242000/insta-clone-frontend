@@ -71,7 +71,10 @@ function LogIn(props) {
         <div className="route">
           <p>
             Don't have an account?{" "}
-            <Link to="/" style={{ textDecoration: "none", color: "#0275d8" }}>
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", color: "#0275d8" }}
+            >
               Sign Up
             </Link>
           </p>
