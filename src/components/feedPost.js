@@ -115,10 +115,7 @@ const FeedPost = (props) => {
             incLikes={incLikes}
             decLikes={decLikes}
           />
-          <Link
-            to={{ pathname: "/feed/post", state: { post: post } }}
-            style={{ textDecoration: "none" }}
-          >
+          <Link to={`/post/${post._id}`} style={{ textDecoration: "none" }}>
             {" "}
             <CommentIcon style={{ margin: "5px 5px" }} />
           </Link>
@@ -157,7 +154,7 @@ const FeedPost = (props) => {
         </div>
         <div className="post-comment-section"></div>
         <Link
-          to={{ pathname: "/feed/post", state: { post: post } }}
+          to={`/post/${post._id}`}
           style={{ textDecoration: "none", color: "grey" }}
         >
           View all {post.commentsCount} comments

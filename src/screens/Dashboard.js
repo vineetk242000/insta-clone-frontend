@@ -57,7 +57,7 @@ function Dashboard(props) {
           <div className="userName">
             <p>{props.userName}</p>
             <span>
-              <Link to="/user/edit">
+              <Link to="/accounts/edit">
                 <button>Edit Profile</button>
               </Link>
             </span>
@@ -133,17 +133,11 @@ function Dashboard(props) {
           ? savedPosts.map((post) => (
               <div className="dashboard-post">
                 <Link
-                  to={{ pathname: "/feed/post", state: { post: post } }}
+                  to={`/post/${post._id}`}
                   style={{ textDecoration: "none" }}
                   key={post._id}
                 >
-                  <img
-                    src={`http://localhost:3001/image/${post.imageUrl.slice(
-                      58,
-                      post.imageUrl.length
-                    )}`}
-                    alt="post"
-                  />
+                  <img src={post.images[0]} alt="post" />
                 </Link>
               </div>
             ))
@@ -154,7 +148,7 @@ function Dashboard(props) {
                 (
                   <div className="dashboard-post">
                     <Link
-                      to={{ pathname: "/feed/post", state: { post: post } }}
+                      to={`/post/${post._id}`}
                       style={{ textDecoration: "none" }}
                       key={post._id}
                     >

@@ -20,7 +20,7 @@ function LogIn(props) {
     const response = await request("/user/login", user);
     if (response.status === 200) {
       dispatch(loginUser(response.data.token));
-      props.history.push("/user");
+      props.history.push("/");
       dispatch({
         type: SET_TOASTIFY,
         payload: {

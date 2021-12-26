@@ -6,6 +6,7 @@ import * as actionTypes from "../store/actionTypes/user";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 import { useFormik } from "formik";
+import { TextField, Container } from "@material-ui/core";
 
 function EditUserInfo(props) {
   const { name, email, userName, bio, gender, website, avatar } = useSelector(
@@ -24,6 +25,44 @@ function EditUserInfo(props) {
       website: website,
       avatar: avatar,
     },
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      const updateUserDetails = new FormData();
+
+      updateUserDetails.append("name", values.name);
+      updateUserDetails.append("userName", values.userName);
+      updateUserDetails.append("email", values.email);
+      updateUserDetails.append("website", values.website);
+      updateUserDetails.append("bio", values.bio);
+      updateUserDetails.append("gender", values.gender);
+      updateUserDetails.append("avatar", values.avatar);
+
+      const response = await request("/user/edit", updateUserDetails, token);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.EDIT_USER_DETAILS,
+          payload: values,
+        });
+        dispatch({
+          type: SET_TOASTIFY,
+          payload: {
+            msg: "User details updated!",
+            type: "success",
+            open: true,
+          },
+        });
+        props.history.push("/dashboard");
+      } else {
+        dispatch({
+          type: SET_TOASTIFY,
+          payload: {
+            msg: "Something went wrong!",
+            type: "error",
+            open: true,
+          },
+        });
+      }
+    },
   });
 
   const inputFile = useRef(null);
@@ -35,104 +74,112 @@ function EditUserInfo(props) {
   const [previewAvatar, setPreviewAvatar] = useState(avatar);
   const [isAvatar, setIsAvatar] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const updateUserDetails = new FormData();
-
-    updateUserDetails.append("name", name);
-    updateUserDetails.append("userName", userName);
-    updateUserDetails.append("email", email);
-    updateUserDetails.append("website", website);
-    updateUserDetails.append("bio", bio);
-    updateUserDetails.append("gender", gender);
-    updateUserDetails.append("avatar", avatar);
-
-    const response = await request(
-      "/editUserProfile",
-      updateUserDetails,
-      token
-    );
-    if (response.status === 200) {
-      dispatch({
-        type: SET_TOASTIFY,
-        payload: {
-          msg: "User details updated!",
-          type: "success",
-          open: true,
-        },
-      });
-      props.history.push("/dashboard");
-    } else {
-      dispatch({
-        type: SET_TOASTIFY,
-        payload: {
-          msg: "Something went wrong!",
-          type: "error",
-          open: true,
-        },
-      });
-    }
-  };
-
   const handleAvatarChange = (event) => {
     event.preventDefault();
     setPreviewAvatar(URL.createObjectURL(event.target.files[0]));
     setIsAvatar(true);
+    formik.setFieldValue("avatar", event.target.files[0]);
   };
 
   return (
-    <div className="edit-user-details-container">
-      <div>
-        <Avatar
-          style={{ height: "100px", width: "100px", left: "40%" }}
-          src={
-            isAvatar
-              ? previewAvatar
-              : props.avatar === undefined
-              ? null
-              : props.avatar
-          }
-        />
-        <p
-          style={{ color: "#0095F6", cursor: "pointer" }}
-          onClick={onButtonClick}
-        >
-          Change Profile Photo
-        </p>
-        <input
-          type="file"
-          id="file"
-          ref={inputFile}
-          style={{ display: "none" }}
-          onChange={(event) => handleAvatarChange(event)}
-        />
-      </div>
-      <div className="field-container">
-        <p>Name</p>
-        <input value={name} />
-      </div>
-      <div className="field-container">
-        <p>User Name</p>
-        <input value={userName} />
-      </div>
-      <div className="field-container">
-        <p>Website</p>
-        <input value={website} />
-      </div>
-      <div className="field-container">
-        <p>Bio</p>
-        <input value={bio} />
-      </div>
-      <div className="field-container">
-        <p>Email</p>
-        <input value={email} />
-      </div>
-      <div className="field-container">
-        <p>Gender</p>
-        <input value={gender} />
-      </div>
-      <button onClick={(event) => handleSubmit(event)}>Save Changes</button>
-    </div>
+    <Container maxWidth="sm" className="edit-user-details-container">
+      <form onSubmit={formik.handleSubmit}>
+        <div style={{ margin: "2rem 0" }}>
+          <Avatar
+            style={{ height: "100px", width: "100px", left: "40%" }}
+            src={
+              isAvatar ? previewAvatar : avatar === undefined ? null : avatar
+            }
+          />
+          <p
+            style={{ color: "#0095F6", cursor: "pointer" }}
+            onClick={onButtonClick}
+          >
+            Change Profile Photo
+          </p>
+          <input
+            type="file"
+            id="file"
+            ref={inputFile}
+            style={{ display: "none" }}
+            onChange={(event) => handleAvatarChange(event)}
+          />
+        </div>
+        <div className="field-container">
+          <p>Name</p>
+          <TextField
+            size="small"
+            variant="outlined"
+            type="text"
+            name="name"
+            spellCheck="false"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+          />
+        </div>
+        <div className="field-container">
+          <p>User Name</p>
+          <TextField
+            size="small"
+            variant="outlined"
+            type="text"
+            name="userName"
+            spellCheck="false"
+            onChange={formik.handleChange}
+            value={formik.values.userName}
+          />
+        </div>
+        <div className="field-container">
+          <p>Website</p>
+          <TextField
+            size="small"
+            variant="outlined"
+            type="text"
+            name="website"
+            spellCheck="false"
+            onChange={formik.handleChange}
+            value={formik.values.website}
+          />
+        </div>
+        <div className="field-container">
+          <p>Bio</p>
+          <TextField
+            size="small"
+            variant="outlined"
+            type="text"
+            name="bio"
+            spellCheck="false"
+            onChange={formik.handleChange}
+            value={formik.values.bio}
+          />
+        </div>
+        <div className="field-container">
+          <p>Email</p>
+          <TextField
+            size="small"
+            variant="outlined"
+            type="text"
+            name="email"
+            spellCheck="false"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+        </div>
+        <div className="field-container">
+          <p>Gender</p>
+          <TextField
+            size="small"
+            variant="outlined"
+            type="text"
+            name="gender"
+            spellCheck="false"
+            onChange={formik.handleChange}
+            value={formik.values.gender}
+          />
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </Container>
   );
 }
 

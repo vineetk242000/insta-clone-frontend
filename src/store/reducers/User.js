@@ -29,13 +29,13 @@ const userReducer = (state = initialState, action) => {
       });
     case actionTypes.EDIT_USER_DETAILS:
       return updateObject(state, {
-        website: action.website,
-        email: action.email,
-        bio: action.bio,
-        gender: action.gender,
-        name: action.name,
-        userName: action.userName,
-        avatar: action.avatar,
+        website: action.payload.website,
+        email: action.payload.email,
+        bio: action.payload.bio,
+        gender: action.payload.gender,
+        name: action.payload.name,
+        userName: action.payload.userName,
+        avatar: action.payload.avatar,
       });
     case actionTypes.DEC_FOLLOWING_COUNT:
       return updateObject(state, {

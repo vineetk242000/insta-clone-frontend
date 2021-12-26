@@ -35,12 +35,12 @@ function App() {
           <Route path="/register" exact component={SignUp} />
           <Route path="/login" exact component={LogIn} />
           <ProtectedRoutes path="/user/:userName" component={UserDashboard} />
-          <ProtectedRoutes path="/feed/post" component={Post} />
+          <ProtectedRoutes path="/post/:id" component={Post} />
           <ProtectedRoutes path="/dashboard" component={Dashboard} />
           <ProtectedRoutes path="/explore" component={Explore} />
           <ProtectedRoutes path="/savedPosts" component={Saved} />
           <ProtectedRoutes path="/createPost" component={Explore} />
-          <ProtectedRoutes path="/user/edit" component={EditUserInfo} />
+          <ProtectedRoutes path="/accounts/edit" component={EditUserInfo} />
           <ProtectedRoutes path="/search_results" component={SearchResults} />
           <ProtectedRoutes path="/user/followers" component={MapFollower} />
           <ProtectedRoutes path="/user/following" component={MapFolllowing} />
