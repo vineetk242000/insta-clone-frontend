@@ -12,7 +12,6 @@ import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 
 function NewPost(props) {
-  console.log(props.token);
   const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState();
   const [caption, setCaption] = useState("");

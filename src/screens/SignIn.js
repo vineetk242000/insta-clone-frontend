@@ -1,45 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import "../styles/screen/LogIn.css";
 import { useDispatch } from "react-redux";
 import request from "../middlewares/axios/post";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 import { loginUser } from "../store/actions/auth";
+import { useFormik } from "formik";
 
 function LogIn(props) {
   const dispatch = useDispatch();
-  const [userName, setUserName] = useState("");
-  const [pass, setPass] = useState("");
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const user = {
-      userName: userName,
-      pass: pass,
-    };
-    const response = await request("/user/login", user);
-    if (response.status === 200) {
-      dispatch(loginUser(response.data.token));
-      props.history.push("/");
-      dispatch({
-        type: SET_TOASTIFY,
-        payload: {
-          msg: "You are now logged in",
-          type: "success",
-          open: true,
-        },
-      });
-    } else {
-      dispatch({
-        type: SET_TOASTIFY,
-        payload: {
-          msg: `${response.data}`,
-          type: "error",
-          open: true,
-        },
-      });
-    }
-  }
+  const formik = useFormik({
+    initialValues: {
+      userName: "",
+      pass: "",
+    },
+    onSubmit: async (values) => {
+      const response = await request("/user/login", values);
+      if (response.status === 200) {
+        dispatch(loginUser(response.data.token));
+        props.history.push("/");
+        dispatch({
+          type: SET_TOASTIFY,
+          payload: {
+            msg: "You are now logged in",
+            type: "success",
+            open: true,
+          },
+        });
+      } else {
+        dispatch({
+          type: SET_TOASTIFY,
+          payload: {
+            msg: `${response.data}`,
+            type: "error",
+            open: true,
+          },
+        });
+      }
+    },
+  });
 
   return (
     <div className="login-div-parent-container">
@@ -48,22 +48,24 @@ function LogIn(props) {
           <img src="https://i.imgur.com/zqpwkLQ.png" alt="Instagram" />
         </div>
         <div className="form-input">
-          <form onSubmit={(event) => handleSubmit(event)}>
+          <form onSubmit={formik.handleSubmit}>
             <input
+              name="userName"
               placeholder="Username"
               type="string"
               spellCheck="false"
               autoCapitalize="off"
               autoComplete="off"
-              onChange={(event) => setUserName(event.target.value)}
+              onChange={formik.handleChange}
             ></input>
             <input
+              name="pass"
               placeholder="Password"
               type="password"
               spellCheck="false"
               autoCapitalize="off"
               autoComplete="off"
-              onChange={(event) => setPass(event.target.value)}
+              onChange={formik.handleChange}
             ></input>
             <button type="submit">Log in</button>
           </form>
