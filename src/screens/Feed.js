@@ -124,9 +124,9 @@ function Feed(props) {
                 <p>{user.name}</p>
               </div>
               <FollowButton
-                userId={userId}
-                userIdToFollow={user._id}
+                userId={user._id}
                 follow={false}
+                userName={user.userName}
               />
             </div>
           ))}

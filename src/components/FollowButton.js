@@ -16,10 +16,18 @@ const FollowButton = (props) => {
 
   const handleFollowUser = async (event) => {
     event.preventDefault();
-    const response = await request(`/follow/${props.userIdToFollow}`, token);
+    const response = await request(`/user/follow/${props.userId}`, token);
     if (response.status === 200) {
       setFollow(true);
       props.incFollowingCount();
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: `You are now following ${props.userName}`,
+          type: "success",
+          open: true,
+        },
+      });
     } else {
       dispatch({
         type: SET_TOASTIFY,
@@ -34,10 +42,18 @@ const FollowButton = (props) => {
 
   const handleUnfollowUser = async (event) => {
     event.preventDefault();
-    const response = await request(`/unfollow/${props.userIdToFollow}`, token);
+    const response = await request(`/user/unfollow/${props.userId}`, token);
     if (response.status === 200) {
       setFollow(false);
       props.decFollowingCount();
+      dispatch({
+        type: SET_TOASTIFY,
+        payload: {
+          msg: `User ${props.userName} removed from your following list!`,
+          type: "success",
+          open: true,
+        },
+      });
     } else {
       dispatch({
         type: SET_TOASTIFY,

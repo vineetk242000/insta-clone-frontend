@@ -55,7 +55,8 @@ function UserDashboard(props) {
                 <span>
                   <FollowButton
                     follow={userData.isFollowed}
-                    userIdToFollow={userData._id}
+                    userId={userData._id}
+                    userName={userData.userName}
                   />
                 </span>
               </div>

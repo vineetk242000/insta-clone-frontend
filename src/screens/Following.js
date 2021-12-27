@@ -53,7 +53,11 @@ const MapFolllowing = (props) => {
           >
             <p>{user.userName}</p>
           </Link>
-          <FollowButton userIdToUnfollow={user._id} unfollow={false} />
+          <FollowButton
+            userId={user._id}
+            follow={true}
+            userName={user.userName}
+          />
         </div>
       ))}
     </div>
