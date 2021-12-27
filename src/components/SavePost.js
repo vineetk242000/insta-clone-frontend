@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BookmarkIcon, FilledBookmarkIcon } from "./Icons";
 import { useDispatch, useSelector } from "react-redux";
-import request from "../middlewares/axios/get";
+import putRequest from "../middlewares/axios/put";
+import deleteRequest from "../middlewares/axios/delete";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 
 const SavePost = (props) => {
@@ -16,7 +17,7 @@ const SavePost = (props) => {
   const handleToggleSave = async () => {
     if (savedState) {
       setSaved(false);
-      const response = await request(`/unsavepost/${props.postId}`, token);
+      const response = await deleteRequest(`/${props.postId}/save`, token);
       if (response.status === 200) {
         props.unsavePost();
       } else {
@@ -31,7 +32,7 @@ const SavePost = (props) => {
       }
     } else {
       setSaved(true);
-      const response = await request(`/savepost/${props.postId}`, token);
+      const response = await putRequest(`/${props.postId}/save`, token);
       if (response.status === 200) {
         props.savePost();
       } else {

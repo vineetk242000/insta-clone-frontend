@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import "../styles/screen/Feed.css";
 import { useDispatch, useSelector } from "react-redux";
-import User from "../components/UserSugestions";
 import SinglePost from "../components/FeedPost";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 import { Container } from "@material-ui/core";
+import FollowButton from "../components/FollowButton";
 
 function Feed(props) {
   const dispatch = useDispatch();
@@ -123,7 +123,11 @@ function Feed(props) {
                 </Link>
                 <p>{user.name}</p>
               </div>
-              <User userId={userId} userIdToFollow={user._id} follow={false} />
+              <FollowButton
+                userId={userId}
+                userIdToFollow={user._id}
+                follow={false}
+              />
             </div>
           ))}
         </div>

@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "../styles/component/Followers.css";
 import Avatar from "@material-ui/core/Avatar";
-import { connect } from "react-redux";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_TOASTIFY } from "../store/actionTypes/toastify";
+import { Link } from "react-router-dom";
+import request from "../middlewares/axios/get";
 
 const MapFollowers = (props) => {
+  const dispatch = useDispatch();
   const [followers, setFollowers] = useState([]);
+  const token = useSelector((state) => state.authReducer.token);
 
   useEffect(() => {
-    const userId = props.userId;
-
     const getFollowers = async () => {
-      await axios
-        .get(`http://localhost:3001/getFollowers/${userId}`)
-        .then(function (response) {
-          setFollowers(response.data.users);
-          console.log(response.data.users);
-        })
-        .catch(function (error) {
-          console.log(error);
+      const response = await request("/user/followers", token);
+      if (response.status === 200) {
+        setFollowers(response.data.users);
+      } else {
+        dispatch({
+          type: SET_TOASTIFY,
+          payload: {
+            type: "error",
+            open: true,
+            msg: "Something went wrong!",
+          },
         });
+      }
     };
 
     getFollowers();
@@ -37,17 +43,15 @@ const MapFollowers = (props) => {
               border: 0,
               objectFit: "cover",
             }}
-            src={
-              user.avatar === undefined
-                ? null
-                : `http://localhost:3001/image/${user.avatar.slice(
-                    58,
-                    user.avatar.length
-                  )}`
-            }
+            src={user.avatar === undefined ? null : user.avatar}
             size={100}
           />
-          <p>{user.userName}</p>
+          <Link
+            to={`/user/${user.userName}`}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <p>{user.userName}</p>
+          </Link>
           <button>Remove</button>
         </div>
       ))}
@@ -55,11 +59,4 @@ const MapFollowers = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    followers: state.followers,
-    userId: state.userId,
-  };
-};
-
-export default connect(mapStateToProps)(MapFollowers);
+export default MapFollowers;

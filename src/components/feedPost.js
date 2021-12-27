@@ -110,8 +110,8 @@ const FeedPost = (props) => {
       <div className="post-details-container">
         <div className="post-action-container">
           <LikePost
-            isLiked={post.isLiked}
-            postId={post._id.toString()}
+            likes={post.likes}
+            postId={post._id}
             incLikes={incLikes}
             decLikes={decLikes}
           />
@@ -131,7 +131,7 @@ const FeedPost = (props) => {
               isSaved={post.isSaved}
               savePost={savePost}
               unsavePost={unsavePost}
-              postId={post._id.toString()}
+              postId={post._id}
             />
           </div>
           <p style={{ fontWeight: "500", fontSize: "15px" }}>

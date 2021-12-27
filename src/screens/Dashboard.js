@@ -68,7 +68,7 @@ function Dashboard(props) {
             </p>
             <p>
               <Link
-                to="/user/followers"
+                to={`/${props.userName}/followers`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <span className="bold">{props.followersCount}</span> followers
@@ -76,7 +76,7 @@ function Dashboard(props) {
             </p>
             <p>
               <Link
-                to="/user/following"
+                to={`/${props.userName}/followings`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <span className="bold">{props.followingCount}</span> following

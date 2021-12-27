@@ -34,6 +34,14 @@ function App() {
         <Switch>
           <Route path="/register" exact component={SignUp} />
           <Route path="/login" exact component={LogIn} />
+          <ProtectedRoutes
+            path="/:userName/followers"
+            component={MapFollower}
+          />
+          <ProtectedRoutes
+            path="/:userName/followings"
+            component={MapFolllowing}
+          />
           <ProtectedRoutes path="/user/:userName" component={UserDashboard} />
           <ProtectedRoutes path="/post/:id" component={Post} />
           <ProtectedRoutes path="/dashboard" component={Dashboard} />
@@ -42,8 +50,6 @@ function App() {
           <ProtectedRoutes path="/createPost" component={Explore} />
           <ProtectedRoutes path="/accounts/edit" component={EditUserInfo} />
           <ProtectedRoutes path="/search_results" component={SearchResults} />
-          <ProtectedRoutes path="/user/followers" component={MapFollower} />
-          <ProtectedRoutes path="/user/following" component={MapFolllowing} />
           <ProtectedRoutes path="/" component={Feed} />
         </Switch>
       </Layout>

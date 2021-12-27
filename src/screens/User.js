@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import "../styles/screen/Dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
-import Follow from "../components/Follow";
+import FollowButton from "../components/FollowButton";
 import request from "../middlewares/axios/get";
 import { SET_TOASTIFY } from "../store/actionTypes/toastify";
 import { Container } from "@material-ui/core";
@@ -53,7 +53,7 @@ function UserDashboard(props) {
               <div className="userName">
                 <p>{userData.userName}</p>
                 <span>
-                  <Follow
+                  <FollowButton
                     follow={userData.isFollowed}
                     userIdToFollow={userData._id}
                   />

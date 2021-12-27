@@ -25,7 +25,7 @@ const Post = (props) => {
 
   useEffect(() => {
     const getPost = async () => {
-      const response = await getRequest(`/user/post/${id}`, token);
+      const response = await getRequest(`/posts/${id}`, token);
       if (response.status === 200) {
         setLikes(response.data.post.likes.length);
         setpost(response.data.post);
@@ -231,8 +231,8 @@ const Post = (props) => {
             </div>
             <div className="single-post-action-container">
               <Like
-                isLiked={post.isLiked}
-                postId={post._id.toString()}
+                likes={post.likes}
+                postId={post._id}
                 incLikes={incLikes}
                 decLikes={decLikes}
               />
@@ -247,7 +247,7 @@ const Post = (props) => {
               >
                 <Save
                   isSaved={post.isSaved}
-                  postId={post._id.toString()}
+                  postId={post._id}
                   savePost={savePost}
                   unsavePost={unsavePost}
                 />
