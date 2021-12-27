@@ -1,0 +1,40 @@
+.following-follower-parent-container {
+  position: fixed;
+  top: 25%;
+  left: 35%;
+  width: 25%;
+  height: 50%;
+  background-color: white;
+  border: 0.5px solid rgb(214, 212, 212);
+  padding: 1.2rem;
+  overflow-y: scroll;
+  border-radius: 5px;
+}
+
+.map-follow-follower {
+  margin: 1rem;
+}
+
+.map-follow-follower p {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.map-follow-follower button {
+  display: inline-block;
+  vertical-align: middle;
+  left: 50%;
+  position: relative;
+  background-color: #0095f6;
+  color: white;
+  border-radius: 3px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  padding: 5px;
+}
+
+.following-follower-parent-container::-webkit-scrollbar {
+  display: none;
+}
