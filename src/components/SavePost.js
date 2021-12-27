@@ -17,7 +17,10 @@ const SavePost = (props) => {
   const handleToggleSave = async () => {
     if (savedState) {
       setSaved(false);
-      const response = await deleteRequest(`/${props.postId}/save`, token);
+      const response = await deleteRequest(
+        `/posts/${props.postId}/save`,
+        token
+      );
       if (response.status === 200) {
         props.unsavePost();
       } else {
@@ -32,7 +35,11 @@ const SavePost = (props) => {
       }
     } else {
       setSaved(true);
-      const response = await putRequest(`/${props.postId}/save`, token);
+      const response = await putRequest(
+        `/posts/${props.postId}/save`,
+        {},
+        token
+      );
       if (response.status === 200) {
         props.savePost();
       } else {
